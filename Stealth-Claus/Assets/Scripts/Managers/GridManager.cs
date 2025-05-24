@@ -26,8 +26,12 @@ public class GridManager : MonoBehaviour
 
     public void setTile(uint x, uint y, Tile tile)
     {
-        if (x >= width || y >= height) return;
-        tiles[x, y] = tile;
-        tile.transform.position = new Vector3(((float)x-((float)width-1)/2), ((float)y-((float)height-1)/2), 0f);
+        if (tile != null)
+        {
+            if (x >= width || y >= height) return;
+            tiles[x, y] = tile;
+            tile.transform.position =
+                new Vector3(((float)x - ((float)width - 1) / 2), ((float)y - ((float)height - 1) / 2), 0f);
+        }
     }
 }
