@@ -1,12 +1,15 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
-    public GridManager gridManager;
+    protected GridManager gridManager;
     
     public Sprite sprite;
 
     public uint x, y;
+
+    private bool initialized = false;
     
     
     
@@ -14,12 +17,45 @@ public class Tile : MonoBehaviour
     void Start()
     {
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
-        gridManager.setTile(x, y, this);
     }
+
+    public void moveTo(uint newX, uint newY)
+    {
+        if (gridManager != null && newX < gridManager.width && newY < gridManager.height) {
+            gridManager.setTile(x, y, gridManager.getTile(newX, newY));
+            x = newX; y = newY;
+            gridManager.setTile(x, y, this);
+        }
+    }
+    public void deltaMove(int dx, int dy)
+    {
+        if (dx + x >= 0 && dy + y >= 0)
+        {
+            moveTo((uint)(dx + x), (uint)(dy + y));
+        }
+    }
+    bool checkOcupied(int x, int y)
+    {
+        if (x < gridManager.width && y < gridManager.height && x >= 0 && y >= 0)
+        {
+            return gridManager.getTile((uint)x, (uint)y) != null;
+        }
+        return true;
+    }
+
+    bool checkOcupiedDelta(int dx, int dy)
+    {
+        return checkOcupied((int)(x + dx), (int)(y + dy));
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!initialized)
+        {
+            gridManager.setTile(x, y, this);
+            initialized = true;
+        }
     }
 }

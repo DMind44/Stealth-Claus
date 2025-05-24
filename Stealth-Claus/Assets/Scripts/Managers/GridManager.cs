@@ -17,7 +17,7 @@ public class GridManager : MonoBehaviour
         
     }
 
-    public Tile GetTile(uint x, uint y)
+    public Tile getTile(uint x, uint y)
     {
         if (x >= width || y >= height) return null;
 
