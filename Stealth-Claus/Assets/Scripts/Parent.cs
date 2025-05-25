@@ -77,18 +77,23 @@ public class Parent : Tile
             {
                 break;
             }
-            Vector3 cords = camera.WorldToScreenPoint(gridManager.convertPoint(new Vector2(x + dirX * i, y + dirY * i)));
-            DrawQuad(new Rect(cords.x, cords.y, 100, 100), new Color(0.7f, 0.7f, 0, 1));
+            Vector3 cords = camera.WorldToScreenPoint(gridManager.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
+            DrawQuad(new Rect(cords.x+5, Screen.height-cords.y+5, tileWidth-10, tileWidth-10), new Color(0.7f, 0.7f, 0, 0.5f));
 
         }
     }
 
     public Camera camera;
+
+    private float tileWidth;
     void Start()
     {
         base.Start();
         //camera = GetComponent<Camera>();
         parentActions[actionIndex].setup();
+
+        tileWidth = camera.WorldToScreenPoint(new Vector3(1, 0, 0)).x - camera.WorldToScreenPoint(new Vector3(0, 0, 0)).x;
+
     }
 
     // Update is called once per frame

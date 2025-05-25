@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
 
     public Vector3 convertPoint(Vector2 vec3)
     {
-        return new Vector3(((float)vec3.x - ((float)width - 1) / 2), ((float)vec3.y - ((float)height - 1) / 2), 0f);
+        return new Vector3(vec3.x - ((float)width - 1) / 2, vec3.y - ((float)height - 1) / 2, 0f);
     }
 
     public void setTile(uint x, uint y, Tile tile)
