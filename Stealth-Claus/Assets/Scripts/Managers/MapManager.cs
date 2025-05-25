@@ -1,14 +1,17 @@
+using System;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public int width, height;
+    public uint width, height;
 
     public MapTile tile;
 
     public Transform camera;
+
+    public static MapManager instance;
 
     void GenerateGrid()
     {
@@ -16,7 +19,7 @@ public class MapManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                var spawnedTile = Instantiate(tile, new Vector3(x, y), Quaternion.identity);
+                var spawnedTile = Instantiate(tile, new Vector3(x, y, 1), Quaternion.identity);
                 spawnedTile.name = $"Tile {x}, {y}";
 
                 bool isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
@@ -31,6 +34,14 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame
