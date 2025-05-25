@@ -8,6 +8,8 @@ public class GridManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        width = MapManager.instance.width;
+        height = MapManager.instance.height;
         tiles = new Tile[width, height];
     }
 
@@ -35,8 +37,8 @@ public class GridManager : MonoBehaviour
         tiles[x, y] = tile;
         if (tile != null)
         {
-            tile.transform.position =
-                new Vector3(((float)x - ((float)width - 1) / 2), ((float)y - ((float)height - 1) / 2), 0f);
+            tile.transform.position = new Vector3(x, y, 0);
+            /*new Vector3(((float)x - ((float)width - 1) / 2), ((float)y - ((float)height - 1) / 2), 0f);*/
         }
     }
 }
