@@ -83,13 +83,13 @@ public class Parent : Tile
         }
     }
 
-    public Camera camera;
+    private Camera camera;
 
     private float tileWidth;
     void Start()
     {
         base.Start();
-        //camera = GetComponent<Camera>();
+        camera = Camera.main;
         parentActions[actionIndex].setup();
 
         tileWidth = camera.WorldToScreenPoint(new Vector3(1, 0, 0)).x - camera.WorldToScreenPoint(new Vector3(0, 0, 0)).x;

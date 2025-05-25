@@ -440,6 +440,10 @@ MonoBehaviour:
     distance: 5
     speed: 3
     delay: 3
+  dirX: 1
+  dirY: 0
+  visionDistance: 3
+  camera: {fileID: 519420031}
 --- !u!212 &1611064511
 SpriteRenderer:
   m_ObjectHideFlags: 0
