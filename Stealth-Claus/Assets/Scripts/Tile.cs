@@ -10,11 +10,18 @@ public class Tile : MonoBehaviour
     public uint x, y;
 
     private bool initialized = false;
-    
-    
+
+    protected void initAfterStart()
+    {
+        if (!initialized)
+        {
+            gridManager.setTile(x, y, this);
+            initialized = true;
+        }
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected void Start()
     {
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
@@ -27,6 +34,15 @@ public class Tile : MonoBehaviour
             gridManager.setTile(x, y, this);
         }
     }
+    public bool tryMoveTo(uint newX, uint newY)
+    {
+        if (!checkOcupied((int)newX, (int)newY))
+        {
+            moveTo(newX, newY);
+            return true;
+        }
+        return false;
+    }
     public void deltaMove(int dx, int dy)
     {
         if (dx + x >= 0 && dy + y >= 0)
@@ -34,7 +50,18 @@ public class Tile : MonoBehaviour
             moveTo((uint)(dx + x), (uint)(dy + y));
         }
     }
-    bool checkOcupied(int x, int y)
+
+    public bool tryDeltaMove(int dx, int dy)
+    {
+        if (!checkOcupiedDelta(dx, dy))
+        {
+            deltaMove(dx, dy);
+            return true;
+        }
+        return false;
+
+    }
+    public bool checkOcupied(int x, int y)
     {
         if (x < gridManager.width && y < gridManager.height && x >= 0 && y >= 0)
         {
@@ -43,7 +70,7 @@ public class Tile : MonoBehaviour
         return true;
     }
 
-    bool checkOcupiedDelta(int dx, int dy)
+    public bool checkOcupiedDelta(int dx, int dy)
     {
         return checkOcupied((int)(x + dx), (int)(y + dy));
     }
@@ -52,10 +79,6 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!initialized)
-        {
-            gridManager.setTile(x, y, this);
-            initialized = true;
-        }
+        initAfterStart(); 
     }
 }

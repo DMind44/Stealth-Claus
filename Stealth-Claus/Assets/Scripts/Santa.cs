@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,40 +19,53 @@ public class Santa : Tile
     // Update is called once per frame
 
     public uint moveSpeed = 1;
-    private bool buttonPressed = false;
+    private bool buttonPressedHorz = false;
+    private bool buttonPressedVert = false;
     private InputType inputType = InputType.Neutral;
     private Vector2 moveVector;
 
     void Update()
     {
+        initAfterStart();
 
-
-        if (inputType != InputType.Neutral)
+        if (math.abs(moveVector.x) > 0.5)
         {
-            if (!buttonPressed)
+            if (!buttonPressedHorz)
             {
-                buttonPressed = true;
-                switch (inputType)
+                buttonPressedHorz = true;
+                if (moveVector.x > 0)
                 {
-                    case InputType.Up:
-                        deltaMove(0, 1);
-                        break;
-                    case InputType.Down:
-                        deltaMove(0, -1);
-                        break;
-                    case InputType.Left:
-                        deltaMove(-1, 0);
-                        break;
-                    case InputType.Right:
-                        deltaMove(1, 0);
-                        break;
-
+                    tryDeltaMove(1, 0);
+                }
+                else
+                {
+                    tryDeltaMove(-1, 0);
                 }
             }
         }
         else
         {
-            buttonPressed = false;
+            buttonPressedHorz = false;
+        }
+
+                if (math.abs(moveVector.y) > 0.5)
+        {
+            if (!buttonPressedVert)
+            {
+                buttonPressedVert = true;
+                if (moveVector.y > 0)
+                {
+                    tryDeltaMove(0, 1);
+                }
+                else
+                {
+                    tryDeltaMove(0, -1);
+                }
+            }
+        }
+        else
+        {
+            buttonPressedVert = false;
         }
     }
 
