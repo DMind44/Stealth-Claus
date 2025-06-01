@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155140c12bf44159b2f9606092ff0be3, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
+  palette: {fileID: 11400000, guid: 5f9d7ae1466112c40b9f87913ffba1c2, type: 2}
   tiles:
   - position: {x: 0, y: 5}
     tileID: 0
@@ -166,7 +167,7 @@ MonoBehaviour:
   - position: {x: 1, y: 2}
     tileID: 0
   - position: {x: 2, y: 2}
-    tileID: 0
+    tileID: 1
   - position: {x: 2, y: 1}
     tileID: 0
   - position: {x: 3, y: 1}
@@ -174,12 +175,22 @@ MonoBehaviour:
   - position: {x: 1, y: 1}
     tileID: 0
   - position: {x: 2, y: 3}
-    tileID: 0
+    tileID: 1
   - position: {x: 3, y: 2}
-    tileID: 0
+    tileID: 1
   - position: {x: 4, y: 0}
     tileID: 0
   - position: {x: 4, y: 1}
     tileID: 0
+  - position: {x: 2, y: 4}
+    tileID: 1
+  - position: {x: 3, y: 4}
+    tileID: 1
+  - position: {x: 4, y: 4}
+    tileID: 1
+  - position: {x: 4, y: 3}
+    tileID: 1
+  - position: {x: 4, y: 2}
+    tileID: 1
   gridWidth: 5
   gridHeight: 5

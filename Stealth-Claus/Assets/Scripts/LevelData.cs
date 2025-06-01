@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,6 +12,7 @@ public class TileData
 [CreateAssetMenu(menuName = "Level/Level Data")]
 public class LevelData : ScriptableObject
 {
+    public TilePalette palette;
     public List<TileData> tiles = new List<TileData>();
     public int gridWidth = 20;
     public int gridHeight = 20;

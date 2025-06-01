@@ -1,6 +1,3 @@
-using System;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -19,14 +16,7 @@ public class MapManager : MonoBehaviour
     
     void LoadTilePrefabs()
     {
-        string prefabFolderPath = "Assets/Prefabs/MapTiles"; // same as the editor
-        string[] guids = UnityEditor.AssetDatabase.FindAssets("t:Prefab", new[] { prefabFolderPath });
-        tilePrefabs = new GameObject[guids.Length];
-        for (int i = 0; i < guids.Length; i++)
-        {
-            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[i]);
-            tilePrefabs[i] = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
-        }
+        tilePrefabs = levelData.palette.tilePrefabs;
     }
 
     void GenerateGrid()

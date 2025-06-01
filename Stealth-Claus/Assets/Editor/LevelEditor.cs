@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using DefaultNamespace;
 
 public class LevelEditorWindow : EditorWindow
 {
@@ -8,7 +9,7 @@ public class LevelEditorWindow : EditorWindow
     private List<GameObject> tilePrefabs;
     private int selectedTileIndex = 0;
     private Vector2 scrollPos;
-    private string prefabFolderPath = "Assets/Prefabs/MapTiles";
+    public TilePalette tilePalette;
 
     [MenuItem("Tools/Level Editor")]
     public static void OpenWindow()
@@ -27,23 +28,19 @@ public class LevelEditorWindow : EditorWindow
         currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
 
         EditorGUILayout.Space();
-        prefabFolderPath = EditorGUILayout.TextField("Prefab Folder Path:", prefabFolderPath);
+        //tilePalette = (TilePalette) EditorGUILayout.ObjectField("Tile Palette", tilePalette, typeof(TilePalette), false);
 
         if (GUILayout.Button("Reload Prefabs"))
         {
             LoadTilePrefabs();
         }
-
-        if (tilePrefabs == null || tilePrefabs.Count == 0)
-        {
-            EditorGUILayout.HelpBox("No prefabs found! Make sure prefabs exist in the folder path.", MessageType.Warning);
-            return;
-        }
-
-        DrawTilePalette();
+        
+        
 
         if (currentLevel == null) return;
-
+        tilePalette = currentLevel.palette;
+        DrawTilePalette();
+        
         EditorGUILayout.Space();
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         DrawTileGrid();
@@ -60,14 +57,12 @@ public class LevelEditorWindow : EditorWindow
     private void LoadTilePrefabs()
     {
         tilePrefabs = new List<GameObject>();
-        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { prefabFolderPath });
-        foreach (string guid in guids)
+        
+        foreach (GameObject tilePrefab in tilePalette.tilePrefabs)
         {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            if (prefab != null)
+            if (tilePrefab != null)
             {
-                tilePrefabs.Add(prefab);
+                tilePrefabs.Add(tilePrefab);
             }
         }
     }
