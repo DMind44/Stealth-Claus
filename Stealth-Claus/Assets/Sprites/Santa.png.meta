@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 68f7de16a4e520b4fb703d30162d290c
+guid: 49c0f084a10f5514398b3ba0655f16a6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3955740310808264383
-    second: Santa_0
+      213: 6207320397523788992
+    second: santa32_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 32
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Santa_0
+      name: santa32_0
       rect:
         serializedVersion: 2
         x: 8
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbe7b61badc95e630800000000000000
-      internalID: 3955740310808264383
+      spriteID: 0c421758305d42650800000000000000
+      internalID: 6207320397523788992
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Santa_0: 3955740310808264383
+      santa32_0: 6207320397523788992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -43,8 +43,6 @@ public class MapManager : MonoBehaviour
                 spawnedTile.ColorTile(isOffset);
             }
         }
-
-        camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
     public void GenerateGridFromData(LevelData data)
@@ -66,6 +64,7 @@ public class MapManager : MonoBehaviour
     {
         if (levelData == null) GenerateGrid();
         else GenerateGridFromData(levelData);
+        camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
     private void Awake()
