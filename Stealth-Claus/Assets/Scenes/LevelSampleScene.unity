@@ -485,6 +485,7 @@ MonoBehaviour:
   height: 6
   tile: {fileID: 7273614986304590490, guid: 55e73d3b89973d44b8d8ca4f5e1fa478, type: 3}
   camera: {fileID: 876805175}
+  levelData: {fileID: 11400000, guid: 3338fd09c2c0e0d4ea7a511f6b08c263, type: 2}
 --- !u!1 &1756645139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1350538844111370687, guid: ef3189fe8779f144babd41f06f3d137f, type: 3}

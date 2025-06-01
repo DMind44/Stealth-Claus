@@ -7,7 +7,7 @@ public class Tile : MonoBehaviour
     
     public Sprite sprite;
 
-    public uint x, y;
+    public int x, y;
 
     private bool initialized = false;
 
@@ -26,7 +26,7 @@ public class Tile : MonoBehaviour
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
-    public void moveTo(uint newX, uint newY)
+    public void moveTo(int newX, int newY)
     {
         if (gridManager != null && newX < gridManager.width && newY < gridManager.height) {
             gridManager.setTile(x, y, gridManager.getTile(newX, newY));
@@ -34,7 +34,7 @@ public class Tile : MonoBehaviour
             gridManager.setTile(x, y, this);
         }
     }
-    public bool tryMoveTo(uint newX, uint newY)
+    public bool tryMoveTo(int newX, int newY)
     {
         if (!checkOcupied((int)newX, (int)newY))
         {
@@ -47,7 +47,7 @@ public class Tile : MonoBehaviour
     {
         if (dx + x >= 0 && dy + y >= 0)
         {
-            moveTo((uint)(dx + x), (uint)(dy + y));
+            moveTo((int)(dx + x), (int)(dy + y));
         }
     }
 
@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
     {
         if (x < gridManager.width && y < gridManager.height && x >= 0 && y >= 0)
         {
-            return gridManager.getTile((uint)x, (uint)y) != null;
+            return gridManager.getTile((int)x, (int)y) != null;
         }
         return true;
     }

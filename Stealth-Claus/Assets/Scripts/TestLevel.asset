@@ -12,6 +12,174 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155140c12bf44159b2f9606092ff0be3, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
-  tiles: []
-  gridWidth: 20
-  gridHeight: 20
+  tiles:
+  - position: {x: 0, y: 5}
+    tileID: 0
+  - position: {x: 0, y: 6}
+    tileID: 0
+  - position: {x: 0, y: 7}
+    tileID: 0
+  - position: {x: 0, y: 8}
+    tileID: 0
+  - position: {x: 0, y: 9}
+    tileID: 0
+  - position: {x: 0, y: 10}
+    tileID: 0
+  - position: {x: 0, y: 11}
+    tileID: 0
+  - position: {x: 0, y: 12}
+    tileID: 0
+  - position: {x: 0, y: 19}
+    tileID: 0
+  - position: {x: 0, y: 18}
+    tileID: 0
+  - position: {x: 0, y: 17}
+    tileID: 0
+  - position: {x: 0, y: 16}
+    tileID: 0
+  - position: {x: 0, y: 15}
+    tileID: 0
+  - position: {x: 0, y: 14}
+    tileID: 0
+  - position: {x: 0, y: 13}
+    tileID: 0
+  - position: {x: 1, y: 19}
+    tileID: 0
+  - position: {x: 2, y: 19}
+    tileID: 0
+  - position: {x: 3, y: 19}
+    tileID: 0
+  - position: {x: 4, y: 19}
+    tileID: 0
+  - position: {x: 5, y: 19}
+    tileID: 0
+  - position: {x: 7, y: 19}
+    tileID: 0
+  - position: {x: 6, y: 19}
+    tileID: 0
+  - position: {x: 8, y: 19}
+    tileID: 0
+  - position: {x: 9, y: 19}
+    tileID: 0
+  - position: {x: 9, y: 18}
+    tileID: 0
+  - position: {x: 9, y: 17}
+    tileID: 0
+  - position: {x: 9, y: 16}
+    tileID: 0
+  - position: {x: 8, y: 16}
+    tileID: 0
+  - position: {x: 8, y: 15}
+    tileID: 0
+  - position: {x: 8, y: 14}
+    tileID: 0
+  - position: {x: 8, y: 13}
+    tileID: 0
+  - position: {x: 8, y: 12}
+    tileID: 0
+  - position: {x: 8, y: 11}
+    tileID: 0
+  - position: {x: 8, y: 10}
+    tileID: 0
+  - position: {x: 9, y: 11}
+    tileID: 0
+  - position: {x: 9, y: 12}
+    tileID: 0
+  - position: {x: 9, y: 13}
+    tileID: 0
+  - position: {x: 9, y: 14}
+    tileID: 0
+  - position: {x: 9, y: 15}
+    tileID: 0
+  - position: {x: 9, y: 10}
+    tileID: 0
+  - position: {x: 9, y: 9}
+    tileID: 0
+  - position: {x: 9, y: 8}
+    tileID: 0
+  - position: {x: 9, y: 7}
+    tileID: 0
+  - position: {x: 9, y: 6}
+    tileID: 0
+  - position: {x: 9, y: 5}
+    tileID: 0
+  - position: {x: 8, y: 5}
+    tileID: 0
+  - position: {x: 7, y: 5}
+    tileID: 0
+  - position: {x: 6, y: 5}
+    tileID: 0
+  - position: {x: 5, y: 5}
+    tileID: 0
+  - position: {x: 4, y: 5}
+    tileID: 0
+  - position: {x: 5, y: 1}
+    tileID: 0
+  - position: {x: 5, y: 2}
+    tileID: 0
+  - position: {x: 6, y: 2}
+    tileID: 0
+  - position: {x: 7, y: 2}
+    tileID: 0
+  - position: {x: 8, y: 2}
+    tileID: 0
+  - position: {x: 9, y: 2}
+    tileID: 0
+  - position: {x: 9, y: 3}
+    tileID: 0
+  - position: {x: 8, y: 3}
+    tileID: 0
+  - position: {x: 8, y: 4}
+    tileID: 0
+  - position: {x: 7, y: 4}
+    tileID: 0
+  - position: {x: 6, y: 4}
+    tileID: 0
+  - position: {x: 5, y: 4}
+    tileID: 0
+  - position: {x: 7, y: 3}
+    tileID: 0
+  - position: {x: 5, y: 3}
+    tileID: 0
+  - position: {x: 6, y: 3}
+    tileID: 0
+  - position: {x: 0, y: 0}
+    tileID: 0
+  - position: {x: 1, y: 0}
+    tileID: 0
+  - position: {x: 2, y: 0}
+    tileID: 0
+  - position: {x: 3, y: 0}
+    tileID: 0
+  - position: {x: 0, y: 1}
+    tileID: 0
+  - position: {x: 0, y: 2}
+    tileID: 0
+  - position: {x: 0, y: 3}
+    tileID: 0
+  - position: {x: 0, y: 4}
+    tileID: 0
+  - position: {x: 1, y: 4}
+    tileID: 0
+  - position: {x: 1, y: 3}
+    tileID: 0
+  - position: {x: 1, y: 2}
+    tileID: 0
+  - position: {x: 2, y: 2}
+    tileID: 0
+  - position: {x: 2, y: 1}
+    tileID: 0
+  - position: {x: 3, y: 1}
+    tileID: 0
+  - position: {x: 1, y: 1}
+    tileID: 0
+  - position: {x: 2, y: 3}
+    tileID: 0
+  - position: {x: 3, y: 2}
+    tileID: 0
+  - position: {x: 4, y: 0}
+    tileID: 0
+  - position: {x: 4, y: 1}
+    tileID: 0
+  gridWidth: 5
+  gridHeight: 5

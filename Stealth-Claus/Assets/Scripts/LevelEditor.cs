@@ -142,18 +142,19 @@ public class LevelEditorWindow : EditorWindow
 
         for (int y = 0; y < gridHeight; y++)
         {
+            int flippedY = (gridHeight - 1) - y;
+
             for (int x = 0; x < gridWidth; x++)
             {
                 Rect cellRect = new Rect(
                     gridRect.x + x * cellSize,
-                    gridRect.y + y * cellSize,
+                    gridRect.y + flippedY * cellSize,
                     cellSize,
                     cellSize
                 );
 
-                EditorGUI.DrawRect(cellRect, new Color(0.2f, 0.2f, 0.2f, 1f)); // Draw cell background
+                EditorGUI.DrawRect(cellRect, new Color(0.2f, 0.2f, 0.2f, 1f));
 
-                // Draw tile preview if one exists
                 TileData tile = GetTileAtPosition(x, y);
                 if (tile != null && tile.tileID >= 0 && tile.tileID < tilePrefabs.Count)
                 {
@@ -164,15 +165,14 @@ public class LevelEditorWindow : EditorWindow
                     }
                 }
 
-                GUI.Box(cellRect, GUIContent.none); // Optional border
-
-                // Handle painting
                 if (cellRect.Contains(mousePos))
                 {
+                    EditorGUI.DrawRect(cellRect, new Color(1f, 1f, 1f, 0.1f));
+
                     if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
                     {
                         SetTileAtPosition(x, y, selectedTileIndex);
-                        e.Use(); // Mark event as used
+                        e.Use();
                     }
                     else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
                     {
@@ -182,6 +182,7 @@ public class LevelEditorWindow : EditorWindow
                 }
             }
         }
+
         DrawGridLines(gridRect, gridWidth, gridHeight, cellSize);
     }
 

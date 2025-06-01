@@ -1,7 +1,7 @@
 using UnityEngine;
 public class GridManager : MonoBehaviour
 {
-    public uint width, height;
+    public int width, height;
     
     private Tile[,] tiles;
     
@@ -19,9 +19,9 @@ public class GridManager : MonoBehaviour
         
     }
 
-    public Tile getTile(uint x, uint y)
+    public Tile getTile(int x, int y)
     {
-        if (x >= width || y >= height) return null;
+        if (x >= width || y >=  height || x < 0 || y < 0) return null;
 
         return tiles[x, y];
     }
@@ -31,9 +31,9 @@ public class GridManager : MonoBehaviour
         return new Vector3(vec3.x, vec3.y, 0f);
     }
 
-    public void setTile(uint x, uint y, Tile tile)
+    public void setTile(int x, int y, Tile tile)
     {
-        if (x >= width || y >= height) return;
+        if (x >= width || y >= height || x < 0 || y < 0) return;
         tiles[x, y] = tile;
         if (tile != null)
         {
