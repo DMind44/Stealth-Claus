@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
-    protected GridManager gridManager;
-    
     public Sprite sprite;
 
     public int x, y;
@@ -15,7 +13,7 @@ public class Tile : MonoBehaviour
     {
         if (!initialized)
         {
-            gridManager.setTile(x, y, this);
+            GridManager.instance.setTile(x, y, this);
             initialized = true;
         }
     }
@@ -23,15 +21,15 @@ public class Tile : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected void Start()
     {
-        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
+        GridManager.instance = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
     public void moveTo(int newX, int newY)
     {
-        if (gridManager != null && newX < gridManager.width && newY < gridManager.height) {
-            gridManager.setTile(x, y, gridManager.getTile(newX, newY));
+        if (GridManager.instance != null && newX < GridManager.instance.width && newY < GridManager.instance.height) {
+            GridManager.instance.setTile(x, y, GridManager.instance.getTile(newX, newY));
             x = newX; y = newY;
-            gridManager.setTile(x, y, this);
+            GridManager.instance.setTile(x, y, this);
         }
     }
     public bool tryMoveTo(int newX, int newY)
@@ -63,9 +61,9 @@ public class Tile : MonoBehaviour
     }
     public bool checkOcupied(int x, int y)
     {
-        if (x < gridManager.width && y < gridManager.height && x >= 0 && y >= 0)
+        if (x < GridManager.instance.width && y < GridManager.instance.height && x >= 0 && y >= 0)
         {
-            return gridManager.getTile((int)x, (int)y) != null;
+            return GridManager.instance.getTile((int)x, (int)y) != null;
         }
         return true;
     }

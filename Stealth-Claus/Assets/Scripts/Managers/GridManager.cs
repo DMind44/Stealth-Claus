@@ -1,10 +1,21 @@
+using System;
 using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public int width, height;
     
     private Tile[,] tiles;
-    
+
+    public static GridManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

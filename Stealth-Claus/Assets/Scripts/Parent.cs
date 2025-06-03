@@ -77,7 +77,7 @@ public class Parent : Tile
             {
                 break;
             }
-            Vector3 cords = camera.WorldToScreenPoint(gridManager.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
+            Vector3 cords = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
             DrawQuad(new Rect(cords.x+5, Screen.height-cords.y+5, tileWidth-10, tileWidth-10), new Color(0.7f, 0.7f, 0, 0.5f));
 
         }

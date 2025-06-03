@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MapTile : MonoBehaviour
 {
+    public int x;
+    public int y;
     public Color baseColor, offsetColor;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -15,3 +15,5 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 6300438138212477121, guid: 55e73d3b89973d44b8d8ca4f5e1fa478, type: 3}
   - {fileID: 6300438138212477121, guid: c839e9c888f61304db0b18cb2c3c8197, type: 3}
+  - {fileID: 8719739380300891156, guid: 89c45f39f85d83a418ec32ecb45da65e, type: 3}
+  - {fileID: 3504494328671729391, guid: e9a0e9238cae17e458636bf65f027517, type: 3}

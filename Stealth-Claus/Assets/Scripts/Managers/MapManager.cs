@@ -46,6 +46,8 @@ public class MapManager : MonoBehaviour
                 var currentTile = tilePrefabs[tileData.tileID];
                 var spawnedTile = Instantiate(currentTile, new Vector3(x, y, 1), Quaternion.identity);
                 spawnedTile.name = $"Tile {x}, {y}";
+                spawnedTile.GetComponent<MapTile>().x = x;
+                spawnedTile.GetComponent<MapTile>().y = y;
             }
         }
     }
