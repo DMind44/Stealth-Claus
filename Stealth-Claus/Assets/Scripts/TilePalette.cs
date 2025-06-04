@@ -6,5 +6,6 @@ namespace DefaultNamespace
     public class TilePalette : ScriptableObject
     {
         public GameObject[] tilePrefabs;
+        public GameObject[] entityPrefabs;
     }
 }

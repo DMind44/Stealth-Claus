@@ -17,3 +17,5 @@ MonoBehaviour:
   - {fileID: 6300438138212477121, guid: c839e9c888f61304db0b18cb2c3c8197, type: 3}
   - {fileID: 8719739380300891156, guid: 89c45f39f85d83a418ec32ecb45da65e, type: 3}
   - {fileID: 3504494328671729391, guid: e9a0e9238cae17e458636bf65f027517, type: 3}
+  entityPrefabs:
+  - {fileID: 8508424116753582895, guid: 66ed9b681ac891641ac5836ebaae45a0, type: 3}

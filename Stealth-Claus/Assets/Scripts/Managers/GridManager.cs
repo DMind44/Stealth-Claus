@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class GridManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GridManager : MonoBehaviour
     private Tile[,] tiles;
 
     public static GridManager instance;
+    
+    public GameObject[] entityPrefabs;
 
     private void Awake()
     {
@@ -22,6 +25,7 @@ public class GridManager : MonoBehaviour
         width = MapManager.instance.width;
         height = MapManager.instance.height;
         tiles = new Tile[width, height];
+        if (MapManager.instance.levelData != null) BuildLevelFromData();
     }
 
     // Update is called once per frame
@@ -50,6 +54,18 @@ public class GridManager : MonoBehaviour
         {
             tile.transform.position = new Vector3(x, y, 0);
             /*new Vector3(((float)x - ((float)width - 1) / 2), ((float)y - ((float)height - 1) / 2), 0f);*/
+        }
+    }
+
+    public void BuildLevelFromData()
+    {
+        entityPrefabs = MapManager.instance.levelData.palette.entityPrefabs;
+        foreach (var tile in MapManager.instance.levelData.entities)
+        {
+            if (tile == null) continue;
+            var prefab = entityPrefabs[tile.entityID];
+            var entity = Instantiate(prefab, new Vector3(tile.position.x, tile.position.y, 0f), Quaternion.identity);
+            entity.GetComponent<Tile>().moveTo(tile.position.x, tile.position.y);            
         }
     }
 }

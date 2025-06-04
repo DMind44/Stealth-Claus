@@ -3,48 +3,90 @@ using UnityEngine;
 using System.Collections.Generic;
 using DefaultNamespace;
 
+
+
 public class LevelEditorWindow : EditorWindow
 {
+    private List<LevelData> allLevels;
+    private int selectedLevelIndex = -1;
     private LevelData currentLevel;
     private List<GameObject> tilePrefabs;
+    private List<GameObject> entityPrefabs;
     private int selectedTileIndex = 0;
+    private int selectedEntityIndex = 0;
     private Vector2 scrollPos;
     public TilePalette tilePalette;
 
+    private enum EditorMode {Map, Entity}
+    private EditorMode mode = EditorMode.Map;
+    
     [MenuItem("Tools/Level Editor")]
     public static void OpenWindow()
     {
         GetWindow<LevelEditorWindow>("Level Editor");
     }
 
-    private void OnEnable()
-    {
-        LoadTilePrefabs();
-    }
-
     private void OnGUI()
     {
+        mode = (EditorMode)EditorGUILayout.EnumPopup("Mode", mode);
         EditorGUILayout.Space();
-        currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
 
+        // Level Selection Dropdown
+        EditorGUILayout.LabelField("Select Level", EditorStyles.boldLabel);
         EditorGUILayout.Space();
-        //tilePalette = (TilePalette) EditorGUILayout.ObjectField("Tile Palette", tilePalette, typeof(TilePalette), false);
+        if (allLevels.Count == 0)
+        {
+            EditorGUILayout.HelpBox("No LevelData assets found! Create one in your project.", MessageType.Warning);
+            return;
+        }
+
+        List<string> levelNames = new List<string>();
+        foreach (var level in allLevels)
+        {
+            levelNames.Add(level.name);
+        }
+
+        selectedLevelIndex = EditorGUILayout.Popup("Level", selectedLevelIndex, levelNames.ToArray());
+
+        if (selectedLevelIndex >= 0 && selectedLevelIndex < allLevels.Count)
+        {
+            currentLevel = allLevels[selectedLevelIndex];
+        }
+        else
+        {
+            currentLevel = null;
+        }
+
+        // Proceed only if currentLevel is selected
+        if (currentLevel == null)
+        {
+            EditorGUILayout.HelpBox("Please select a level to edit.", MessageType.Info);
+            return;
+        }
 
         if (GUILayout.Button("Reload Prefabs"))
         {
             LoadTilePrefabs();
         }
-        
-        
 
-        if (currentLevel == null) return;
-        tilePalette = currentLevel.palette;
+        if (tilePalette == null)
+        {
+            EditorGUILayout.HelpBox("No TilePalette assigned in the selected LevelData!", MessageType.Warning);
+            return;
+        }
+
         DrawTilePalette();
-        
+
         EditorGUILayout.Space();
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-        DrawTileGrid();
-        EditorGUILayout.EndScrollView();
+        try
+        {
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+            DrawTileGrid();
+        }
+        finally
+        {
+            EditorGUILayout.EndScrollView();
+        }
 
         EditorGUILayout.Space();
         if (GUILayout.Button("Save Level"))
@@ -56,13 +98,21 @@ public class LevelEditorWindow : EditorWindow
 
     private void LoadTilePrefabs()
     {
+        tilePalette = currentLevel.palette;
         tilePrefabs = new List<GameObject>();
-        
-        foreach (GameObject tilePrefab in tilePalette.tilePrefabs)
+        entityPrefabs = new List<GameObject>();
+        foreach (var tilePrefab in tilePalette.tilePrefabs)
         {
             if (tilePrefab != null)
             {
                 tilePrefabs.Add(tilePrefab);
+            }
+        }
+        foreach (var tilePrefab in tilePalette.entityPrefabs)
+        {
+            if (tilePrefab != null)
+            {
+                entityPrefabs.Add(tilePrefab);
             }
         }
     }
@@ -71,9 +121,11 @@ public class LevelEditorWindow : EditorWindow
     {
         EditorGUILayout.LabelField("Tile Palette", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
-        for (int i = 0; i < tilePrefabs.Count; i++)
+        List<GameObject> currentPalette = mode == EditorMode.Map ? tilePrefabs : entityPrefabs;
+        //if (currentPalette.Count == 0) return;
+        for (int i = 0; i < currentPalette.Count; i++)
         {
-            Texture2D preview = AssetPreview.GetAssetPreview(tilePrefabs[i]);
+            Texture2D preview = AssetPreview.GetAssetPreview(currentPalette[i]);
             if (preview == null)
             {
                 preview = Texture2D.grayTexture;
@@ -87,7 +139,14 @@ public class LevelEditorWindow : EditorWindow
 
             if (GUILayout.Button(preview, style, GUILayout.Width(50), GUILayout.Height(50)))
             {
-                selectedTileIndex = i;
+                if (mode == EditorMode.Map)
+                {
+                    selectedTileIndex = i;
+                }
+                else if (mode == EditorMode.Entity)
+                {
+                    selectedEntityIndex = i;
+                }
             }
         }
         EditorGUILayout.EndHorizontal();
@@ -159,25 +218,53 @@ public class LevelEditorWindow : EditorWindow
                         GUI.DrawTexture(cellRect, preview, ScaleMode.ScaleToFit);
                     }
                 }
+                
+                EntityData entity = GetEntityAtPosition(x, y);
+                if (entity != null && entity.entityID >= 0 && entity.entityID < entityPrefabs.Count)
+                {
+                    Texture2D preview = AssetPreview.GetAssetPreview(entityPrefabs[entity.entityID]);
+                    if (preview != null)
+                    {
+                        GUI.DrawTexture(cellRect, preview, ScaleMode.ScaleToFit);
+                    }
+                }
 
                 if (cellRect.Contains(mousePos))
                 {
                     EditorGUI.DrawRect(cellRect, new Color(1f, 1f, 1f, 0.1f));
-
-                    if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
+                    if (mode == EditorMode.Map)
                     {
-                        SetTileAtPosition(x, y, selectedTileIndex);
-                        e.Use();
+                        if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
+                        {
+                            SetTileAtPosition(x, y, selectedTileIndex);
+                            e.Use();
+                        }
+                        else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
+                        {
+                            RemoveTileAtPosition(x, y);
+                            e.Use();
+                        }
                     }
-                    else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
+                    if (mode == EditorMode.Entity)
                     {
-                        RemoveTileAtPosition(x, y);
-                        e.Use();
+                        if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
+                        {
+                            SetEntityAtPosition(x, y, selectedEntityIndex);
+                            e.Use();
+                        }
+                        else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
+                        {
+                            RemoveEntityAtPosition(x, y);
+                            e.Use();
+                        }
                     }
+                    
                 }
+
+                
             }
         }
-
+        
         DrawGridLines(gridRect, gridWidth, gridHeight, cellSize);
     }
 
@@ -198,6 +285,61 @@ public class LevelEditorWindow : EditorWindow
         else
         {
             tile.tileID = tileID;
+        }
+    }
+    
+    private EntityData GetEntityAtPosition(int x, int y)
+    {
+        return currentLevel.entities.Find(e => e.position == new Vector2Int(x, y));
+    }
+
+    private void SetEntityAtPosition(int x, int y, int entityID)
+    {
+        EntityData entity = GetEntityAtPosition(x, y);
+        if (entity == null)
+        {
+            entity = new EntityData { position = new Vector2Int(x, y), entityID = entityID };
+            currentLevel.entities.Add(entity);
+        }
+        else
+        {
+            entity.entityID = entityID;
+        }
+    }
+    
+    private void RemoveEntityAtPosition(int x, int y)
+    {
+        var entity = GetEntityAtPosition(x, y);
+        if (entity != null)
+        {
+            currentLevel.entities.Remove(entity);
+        }
+    }
+
+    private void OnEnable()
+    {
+        LoadLevelDataAssets();
+        LoadTilePrefabs();
+    }
+
+    private void LoadLevelDataAssets()
+    {
+        allLevels = new List<LevelData>();
+        string[] guids = AssetDatabase.FindAssets("t:LevelData");
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            LevelData level = AssetDatabase.LoadAssetAtPath<LevelData>(path);
+            if (level != null)
+            {
+                allLevels.Add(level);
+            }
+        }
+
+        if (allLevels.Count != 0)
+        {
+            selectedLevelIndex = 0;
+            currentLevel = allLevels[selectedLevelIndex];
         }
     }
 }
