@@ -174,10 +174,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.24973987
-    y: 0.09443508
-    width: 0.49947974
-    height: 0.80944353
+    x: 0.28156224
+    y: 0.057195574
+    width: 0.43596733
+    height: 0.88560885
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -322,7 +322,7 @@ MonoBehaviour:
     delay: 1
   - directionX: 0
     directionY: 1
-    distance: 5
+    distance: 3
     speed: 3
     delay: 3
   - directionX: -1
@@ -332,7 +332,7 @@ MonoBehaviour:
     delay: 3
   - directionX: 0
     directionY: -1
-    distance: 5
+    distance: 3
     speed: 3
     delay: 3
   dirX: 1

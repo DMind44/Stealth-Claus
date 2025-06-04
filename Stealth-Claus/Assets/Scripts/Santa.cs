@@ -24,48 +24,55 @@ public class Santa : Tile
     private InputType inputType = InputType.Neutral;
     private Vector2 moveVector;
 
+    override public bool isSanta()
+    {
+        return true;
+    }
+
     void Update()
     {
         initAfterStart();
-
-        if (math.abs(moveVector.x) > 0.5)
+        if (!GridManager.instance.isFrozen())
         {
-            if (!buttonPressedHorz)
+            if (math.abs(moveVector.x) > 0.5)
             {
-                buttonPressedHorz = true;
-                if (moveVector.x > 0)
+                if (!buttonPressedHorz)
                 {
-                    tryDeltaMove(1, 0);
-                }
-                else
-                {
-                    tryDeltaMove(-1, 0);
+                    buttonPressedHorz = true;
+                    if (moveVector.x > 0)
+                    {
+                        tryDeltaMove(1, 0);
+                    }
+                    else
+                    {
+                        tryDeltaMove(-1, 0);
+                    }
                 }
             }
-        }
-        else
-        {
-            buttonPressedHorz = false;
-        }
-
-                if (math.abs(moveVector.y) > 0.5)
-        {
-            if (!buttonPressedVert)
+            else
             {
-                buttonPressedVert = true;
-                if (moveVector.y > 0)
+                buttonPressedHorz = false;
+            }
+
+            if (math.abs(moveVector.y) > 0.5)
+            {
+                if (!buttonPressedVert)
                 {
-                    tryDeltaMove(0, 1);
-                }
-                else
-                {
-                    tryDeltaMove(0, -1);
+                    buttonPressedVert = true;
+                    if (moveVector.y > 0)
+                    {
+                        tryDeltaMove(0, 1);
+                    }
+                    else
+                    {
+                        tryDeltaMove(0, -1);
+                    }
                 }
             }
-        }
-        else
-        {
-            buttonPressedVert = false;
+            else
+            {
+                buttonPressedVert = false;
+            }
         }
     }
 
