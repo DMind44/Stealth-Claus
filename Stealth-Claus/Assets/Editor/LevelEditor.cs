@@ -220,7 +220,7 @@ public class LevelEditorWindow : EditorWindow
                 }
                 
                 EntityData entity = GetEntityAtPosition(x, y);
-                if (entity != null && entity.entityID >= 0 && entity.entityID < entityPrefabs.Count)
+                if (entity != null && entity.entityID >= 0 && entity.entityID < entityPrefabs.Count && mode == EditorMode.Entity)
                 {
                     Texture2D preview = AssetPreview.GetAssetPreview(entityPrefabs[entity.entityID]);
                     if (preview != null)

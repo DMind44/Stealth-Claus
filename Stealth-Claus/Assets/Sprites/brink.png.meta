@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 49c0f084a10f5514398b3ba0655f16a6
+guid: 7f8b7e3491edb904d84f647f0c15a98c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6207320397523788992
-    second: santa32_0
+      213: 3998667202903700158
+    second: brink_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: santa32_0
+      name: brink_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 0
         y: 0
-        width: 15
-        height: 30
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c421758305d42650800000000000000
-      internalID: 6207320397523788992
+      spriteID: eb2741c92ae1e7730800000000000000
+      internalID: 3998667202903700158
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      santa32_0: 6207320397523788992
+      brink_0: 3998667202903700158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

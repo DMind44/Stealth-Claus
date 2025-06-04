@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1102082573080805130}
   - component: {fileID: 7273614986304590490}
   m_Layer: 0
-  m_Name: Tile brown
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7440981132975211316, guid: 5eb68c1bcd09efe46a4dc24bb7b28e7a, type: 3}
   m_Color: {r: 0.6415094, g: 0.25215155, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a80aa735d36a6b478a9c44150640043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
   baseColor: {r: 0.3962264, g: 0.18593712, b: 0, a: 1}
   offsetColor: {r: 0, g: 0, b: 0, a: 1}
   _spriteRenderer: {fileID: 1102082573080805130}
