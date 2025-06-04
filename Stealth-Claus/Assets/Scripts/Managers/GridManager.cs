@@ -4,6 +4,11 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public int width, height;
+
+    private bool isCaught = false;
+    private bool isWon = false;
+
+    private double timer = 0;
     
     private Tile[,] tiles;
 
@@ -31,12 +36,69 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isCaught)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                isCaught = false;
+                restart();
+            }
+        }
+        else if (isWon)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                isWon = false;
+                nextLevel();
+            }
+        }
+    }
+
+    public void nextLevel()
+    {
         
+    }
+
+    public void startWon()
+    {
+        if (!isFrozen())
+        {
+            timer = 2;
+            isWon = true;
+        }
+    }
+
+    public void restart()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Tile t = getTile(i, j);
+                if (t != null)
+                {
+                    t.restart();
+                }
+            }
+        }
+    }
+
+    public void startCaught()
+    {
+        isCaught = true;
+        timer = 2;
+    }
+
+    public bool isFrozen()
+    {
+        return isCaught || isWon;
     }
 
     public Tile getTile(int x, int y)
     {
-        if (x >= width || y >=  height || x < 0 || y < 0) return null;
+        if (x >= width || y >= height || x < 0 || y < 0) return null;
 
         return tiles[x, y];
     }

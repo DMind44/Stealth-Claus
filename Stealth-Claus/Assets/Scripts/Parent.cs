@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -56,6 +57,10 @@ public class Parent : Tile
     public int dirX = 1;
     public int dirY = 0;
 
+    private int startDirX = 1;
+
+    private int startDirY = 0;
+
     public int visionDistance = 3;
 
     private int actionIndex = 0;
@@ -69,12 +74,31 @@ public class Parent : Tile
         GUI.Box(position, GUIContent.none);
     }
 
+    override public void restart()
+    {
+        base.restart();
+        dirX = startDirX;
+        dirY = startDirY;
+        actionIndex = 0;
+        parentActions[actionIndex].setup();
+    }
+
     void drawVision()
     {
         for (int i = 1; i < visionDistance + 1; i++)
         {
             if (checkOcupiedDelta(dirX * i, dirY * i))
             {
+                Tile possibleSanta = GridManager.instance.getTile((int)x + dirX * i, (int)y + dirY * i);
+                if (possibleSanta != null && possibleSanta.isSanta())
+                {
+                    Vector3 cords2 = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x - 0.5f + dirX * i, y + 0.5f + dirY * i)));
+                    DrawQuad(new Rect(cords2.x + 5, Screen.height - cords2.y + 5, tileWidth - 10, tileWidth - 10), new Color(0.7f, 0.7f, 0, 0.5f));
+                    if (!GridManager.instance.isFrozen())
+                    {
+                        GridManager.instance.startCaught();
+                    }
+                }
                 break;
             }
             Vector3 cords = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
@@ -91,6 +115,8 @@ public class Parent : Tile
         base.Start();
         camera = Camera.main;
         parentActions[actionIndex].setup();
+        startDirX = dirX;
+        startDirY = dirY;
 
         tileWidth = camera.WorldToScreenPoint(new Vector3(1, 0, 0)).x - camera.WorldToScreenPoint(new Vector3(0, 0, 0)).x;
 
@@ -100,11 +126,14 @@ public class Parent : Tile
     void Update()
     {
         initAfterStart();
-        parentActions[actionIndex].actionStep(this);
-        if (parentActions[actionIndex].actionDone())
+        if (!GridManager.instance.isFrozen())
         {
-            actionIndex = (actionIndex + 1) % parentActions.Count;
-            parentActions[actionIndex].setup();
+            parentActions[actionIndex].actionStep(this);
+            if (parentActions[actionIndex].actionDone())
+            {
+                actionIndex = (actionIndex + 1) % parentActions.Count;
+                parentActions[actionIndex].setup();
+            }
         }
     }
 
