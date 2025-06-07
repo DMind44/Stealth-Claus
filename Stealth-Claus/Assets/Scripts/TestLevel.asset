@@ -287,19 +287,9 @@ MonoBehaviour:
   entities:
   - position: {x: 0, y: 0}
     entityID: 0
-    actions:
-    - actionType: Wait
-      param1: 5
-      param2: 0
-      param3: 0
-      param4: 0
   - position: {x: 6, y: 2}
     entityID: 0
-    actions:
-    - actionType: Move
-      param1: 1
-      param2: 0
-      param3: 3
-      param4: 1
+  - position: {x: 3, y: 4}
+    entityID: 1
   gridWidth: 10
   gridHeight: 10
