@@ -14,6 +14,7 @@ public class EntityData
 {
     public Vector2Int position;
     public int entityID;
+    public List<EntityAction> actions;
 }
 
 [CreateAssetMenu(menuName = "Level/Level Data")]

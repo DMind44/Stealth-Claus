@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ public class LevelEditorWindow : EditorWindow
     private int selectedEntityIndex = 0;
     private Vector2 scrollPos;
     public TilePalette tilePalette;
+
+    public string actionText = "";
+    private EntityData selectedEntity = null;
 
     private enum EditorMode {Map, Entity}
     private EditorMode mode = EditorMode.Map;
@@ -86,6 +90,11 @@ public class LevelEditorWindow : EditorWindow
         finally
         {
             EditorGUILayout.EndScrollView();
+        }
+        
+        if (mode == EditorMode.Entity && selectedEntity != null)
+        {
+            DrawEntityActions(selectedEntity);
         }
 
         EditorGUILayout.Space();
@@ -250,11 +259,15 @@ public class LevelEditorWindow : EditorWindow
                         if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
                         {
                             SetEntityAtPosition(x, y, selectedEntityIndex);
+                            selectedEntity = GetEntityAtPosition(x, y);
+                            LoadActionCommands(selectedEntity);
                             e.Use();
                         }
                         else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
                         {
                             RemoveEntityAtPosition(x, y);
+                            selectedEntity = null;
+                            actionText = "";  // clear text area
                             e.Use();
                         }
                     }
@@ -301,10 +314,10 @@ public class LevelEditorWindow : EditorWindow
             entity = new EntityData { position = new Vector2Int(x, y), entityID = entityID };
             currentLevel.entities.Add(entity);
         }
-        else
+        /*else
         {
             entity.entityID = entityID;
-        }
+        }*/
     }
     
     private void RemoveEntityAtPosition(int x, int y)
@@ -342,4 +355,85 @@ public class LevelEditorWindow : EditorWindow
             currentLevel = allLevels[selectedLevelIndex];
         }
     }
+
+    private void DrawEntityActions(EntityData entity)
+    {
+        EditorGUILayout.LabelField("Entity Actions", EditorStyles.boldLabel);
+        actionText = EditorGUILayout.TextArea(actionText, GUILayout.Height(100));
+
+        if (GUILayout.Button("Apply Actions"))
+        {
+            entity.actions = ParseActions(actionText);
+        }
+    }
+
+    private List<EntityAction> ParseActions(string text)
+    {
+        var actions = new List<EntityAction>();
+        var lines = text.Split(new[] { '\n', '\r' });
+
+        foreach (var line in lines)
+        {
+            var trimmedLine = line.Trim();
+            
+            if (string.IsNullOrEmpty(trimmedLine)) continue;
+            
+            var tokens = trimmedLine.Split(' ');
+
+            var command = tokens[0];
+
+            if (command.Equals("Move", StringComparison.InvariantCultureIgnoreCase) && tokens.Length >= 4)
+            {
+                if (int.TryParse(tokens[1], out int dx) && int.TryParse(tokens[2], out int dy) &&
+                    int.TryParse(tokens[3], out int dist))
+                {
+                    actions.Add(new MoveAction
+                    {
+                        dx = dx,
+                        dy = dy,
+                        distance = dist
+                    });
+                }
+            } 
+            else if (command.Equals("Wait", StringComparison.OrdinalIgnoreCase) && tokens.Length >= 2)
+            {
+                if (int.TryParse(tokens[1], out int duration))
+                {
+                    actions.Add(new WaitAction
+                    {
+                        duration = duration
+                    });
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Unrecognized command: {trimmedLine}");
+            }
+        }
+        return actions;
+    }
+    
+    private void LoadActionCommands(EntityData entity)
+    {
+        var sb = new System.Text.StringBuilder();
+
+        if (entity.actions == null)
+        {
+            actionText = "";
+            return;
+        }
+        foreach (var action in entity.actions)
+        {
+            if (action is MoveAction move)
+            {
+                sb.AppendLine($"Move {move.dx} {move.dy} {move.distance}");
+            }
+            else if (action is WaitAction wait)
+            {
+                sb.AppendLine($"Wait {wait.duration}");
+            }
+        }
+        actionText = sb.ToString();
+    }
+
 }

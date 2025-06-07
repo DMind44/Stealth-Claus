@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 3504494328671729391, guid: e9a0e9238cae17e458636bf65f027517, type: 3}
   entityPrefabs:
   - {fileID: 8508424116753582895, guid: 66ed9b681ac891641ac5836ebaae45a0, type: 3}
+  - {fileID: 1028805101514970819, guid: 3f55c8909d3c6084ba872c6ccf09542a, type: 3}
