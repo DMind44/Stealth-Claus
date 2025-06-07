@@ -382,16 +382,17 @@ public class LevelEditorWindow : EditorWindow
 
             var command = tokens[0];
 
-            if (command.Equals("Move", StringComparison.InvariantCultureIgnoreCase) && tokens.Length >= 4)
+            if (command.Equals("Move", StringComparison.InvariantCultureIgnoreCase) && tokens.Length >= 5)
             {
                 if (int.TryParse(tokens[1], out int dx) && int.TryParse(tokens[2], out int dy) &&
-                    int.TryParse(tokens[3], out int dist))
+                    int.TryParse(tokens[3], out int dist) && int.TryParse(tokens[4], out int speed))
                 {
                     actions.Add(new MoveAction
                     {
                         dx = dx,
                         dy = dy,
-                        distance = dist
+                        distance = dist,
+                        speed = speed
                     });
                 }
             } 
