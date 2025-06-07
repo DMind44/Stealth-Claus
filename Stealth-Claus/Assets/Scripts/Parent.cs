@@ -113,6 +113,10 @@ public class Parent : Tile
     void Start()
     {
         base.Start();
+        if (parentActions.Count == 0)
+        {
+            parentActions.Add(new ParentAction() { directionX = 0, directionY = 0, delay = 1, speed = 0});
+        }
         camera = Camera.main;
         parentActions[actionIndex].setup();
         startDirX = dirX;
