@@ -289,5 +289,7 @@ MonoBehaviour:
     entityID: 0
   - position: {x: 6, y: 2}
     entityID: 0
+  - position: {x: 3, y: 4}
+    entityID: 1
   gridWidth: 10
   gridHeight: 10
