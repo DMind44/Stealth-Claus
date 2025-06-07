@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 public class GridManager : MonoBehaviour
 {
@@ -127,7 +128,37 @@ public class GridManager : MonoBehaviour
             if (tile == null) continue;
             var prefab = entityPrefabs[tile.entityID];
             var entity = Instantiate(prefab, new Vector3(tile.position.x, tile.position.y, 0f), Quaternion.identity);
-            entity.GetComponent<Tile>().moveTo(tile.position.x, tile.position.y);            
+
+            var isParent = entity.TryGetComponent<Parent>(out var parent);
+            var dataActions = tile.actions;
+            if (isParent && dataActions != null)
+            {
+                parent.parentActions.Clear();
+                foreach (var action in dataActions)
+                {
+                    ParentAction newAction = new ParentAction();
+                    switch (action.actionType)
+                    {
+                        case "Move":
+                            newAction.directionX = action.param1;
+                            newAction.directionY = action.param2;
+                            newAction.distance = action.param3;
+                            newAction.speed = action.param4;
+                            newAction.delay = 0;
+                            break;
+                        case "Wait":
+                            newAction.directionX = 0;
+                            newAction.directionY = 0;
+                            newAction.distance = 0;
+                            newAction.speed = 0;
+                            newAction.delay = action.param1;
+                            break;
+                    }
+                    parent.parentActions.Add(newAction);
+                }
+                parent.enabled = true;
+            }
+            entity.GetComponent<Tile>().moveTo(tile.position.x, tile.position.y);
         }
     }
 }

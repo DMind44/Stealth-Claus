@@ -53,7 +53,7 @@ public class ParentAction
 public class Parent : Tile
 {
 
-    public List<ParentAction> parentActions;
+    public List<ParentAction> parentActions = new List<ParentAction>();
     public int dirX = 1;
     public int dirY = 0;
 

@@ -22,5 +22,5 @@ public class MoveAction : EntityAction
 public class WaitAction : EntityAction
 {
     public override string ActionName => "Wait";
-    public float duration;
+    public int duration;
 }

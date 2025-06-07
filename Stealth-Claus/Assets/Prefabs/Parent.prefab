@@ -103,27 +103,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   x: 0
   y: 0
-  parentActions:
-  - directionX: 1
-    directionY: 0
-    distance: 4
-    speed: 13
-    delay: 1
-  - directionX: 0
-    directionY: 1
-    distance: 5
-    speed: 3
-    delay: 3
-  - directionX: -1
-    directionY: 0
-    distance: 4
-    speed: 3
-    delay: 3
-  - directionX: 0
-    directionY: -1
-    distance: 5
-    speed: 3
-    delay: 3
+  parentActions: []
   dirX: 1
   dirY: 0
   visionDistance: 3

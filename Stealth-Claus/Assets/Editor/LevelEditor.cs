@@ -258,6 +258,7 @@ public class LevelEditorWindow : EditorWindow
                     {
                         if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 0)
                         {
+                            GUI.FocusControl(null);
                             SetEntityAtPosition(x, y, selectedEntityIndex);
                             selectedEntity = GetEntityAtPosition(x, y);
                             LoadActionCommands(selectedEntity);
@@ -265,6 +266,7 @@ public class LevelEditorWindow : EditorWindow
                         }
                         else if ((e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && e.button == 1)
                         {
+                            GUI.FocusControl(null);
                             RemoveEntityAtPosition(x, y);
                             selectedEntity = null;
                             actionText = "";  // clear text area
@@ -364,12 +366,14 @@ public class LevelEditorWindow : EditorWindow
         if (GUILayout.Button("Apply Actions"))
         {
             entity.actions = ParseActions(actionText);
+            EditorUtility.SetDirty(currentLevel);
+            AssetDatabase.SaveAssets();
         }
     }
 
-    private List<EntityAction> ParseActions(string text)
+    private List<EntityActionData> ParseActions(string text)
     {
-        var actions = new List<EntityAction>();
+        var actions = new List<EntityActionData>();
         var lines = text.Split(new[] { '\n', '\r' });
 
         foreach (var line in lines)
@@ -387,12 +391,13 @@ public class LevelEditorWindow : EditorWindow
                 if (int.TryParse(tokens[1], out int dx) && int.TryParse(tokens[2], out int dy) &&
                     int.TryParse(tokens[3], out int dist) && int.TryParse(tokens[4], out int speed))
                 {
-                    actions.Add(new MoveAction
-                    {
-                        dx = dx,
-                        dy = dy,
-                        distance = dist,
-                        speed = speed
+                    actions.Add(new EntityActionData
+                    { 
+                        actionType = "Move",
+                        param1 = dx,
+                        param2 = dy,
+                        param3 = dist,
+                        param4 = speed
                     });
                 }
             } 
@@ -400,9 +405,10 @@ public class LevelEditorWindow : EditorWindow
             {
                 if (int.TryParse(tokens[1], out int duration))
                 {
-                    actions.Add(new WaitAction
+                    actions.Add(new EntityActionData
                     {
-                        duration = duration
+                        actionType = "Wait",
+                        param1 = duration
                     });
                 }
             }
@@ -425,13 +431,13 @@ public class LevelEditorWindow : EditorWindow
         }
         foreach (var action in entity.actions)
         {
-            if (action is MoveAction move)
+            if (action.actionType == "Move")
             {
-                sb.AppendLine($"Move {move.dx} {move.dy} {move.distance}");
+                sb.AppendLine($"Move {action.param1} {action.param2} {action.param3} {action.param4}");
             }
-            else if (action is WaitAction wait)
+            else if (action.actionType == "Wait")
             {
-                sb.AppendLine($"Wait {wait.duration}");
+                sb.AppendLine($"Wait {action.param1}");
             }
         }
         actionText = sb.ToString();

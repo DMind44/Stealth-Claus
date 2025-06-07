@@ -10,11 +10,21 @@ public class TileData
 }
 
 [System.Serializable]
+public class EntityActionData
+{
+    public string actionType;
+    public int param1;
+    public int param2;
+    public int param3;
+    public int param4;
+}
+
+[System.Serializable]
 public class EntityData
 {
     public Vector2Int position;
     public int entityID;
-    public List<EntityAction> actions;
+    public List<EntityActionData> actions;
 }
 
 [CreateAssetMenu(menuName = "Level/Level Data")]
