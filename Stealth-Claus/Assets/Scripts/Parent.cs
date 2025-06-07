@@ -16,6 +16,7 @@ public class ParentAction
     private int distanceLeft = 0;
     private bool ranDelay = false;
 
+
     public void setup()
     {
         timer = delay;
@@ -65,12 +66,14 @@ public class Parent : Tile
 
     private int actionIndex = 0;
 
-    void DrawQuad(Rect position, Color color)
+    private Texture2D visionTexture;
+    private Color visionColor;
+
+    void DrawQuad(Rect position)
     {
-        Texture2D texture = new Texture2D(1, 1);
-        texture.SetPixel(0, 0, color);
-        texture.Apply();
-        GUI.skin.box.normal.background = texture;
+        visionTexture.SetPixel(0, 0, visionColor);
+        visionTexture.Apply();
+        GUI.skin.box.normal.background = visionTexture;
         GUI.Box(position, GUIContent.none);
     }
 
@@ -93,7 +96,7 @@ public class Parent : Tile
                 if (possibleSanta != null && possibleSanta.isSanta())
                 {
                     Vector3 cords2 = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x - 0.5f + dirX * i, y + 0.5f + dirY * i)));
-                    DrawQuad(new Rect(cords2.x + 5, Screen.height - cords2.y + 5, tileWidth - 10, tileWidth - 10), new Color(0.7f, 0.7f, 0, 0.5f));
+                    DrawQuad(new Rect(cords2.x + 5, Screen.height - cords2.y + 5, tileWidth - 10, tileWidth - 10));
                     if (!GridManager.instance.isFrozen())
                     {
                         GridManager.instance.startCaught();
@@ -102,7 +105,7 @@ public class Parent : Tile
                 break;
             }
             Vector3 cords = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
-            DrawQuad(new Rect(cords.x+5, Screen.height-cords.y+5, tileWidth-10, tileWidth-10), new Color(0.7f, 0.7f, 0, 0.5f));
+            DrawQuad(new Rect(cords.x+5, Screen.height-cords.y+5, tileWidth-10, tileWidth-10));
 
         }
     }
@@ -123,6 +126,9 @@ public class Parent : Tile
         startDirY = dirY;
 
         tileWidth = camera.WorldToScreenPoint(new Vector3(1, 0, 0)).x - camera.WorldToScreenPoint(new Vector3(0, 0, 0)).x;
+        
+        visionTexture = new Texture2D(1, 1);
+        visionColor = new Color(0.7f, 0.7f, 0, 0.5f);
 
     }
 
