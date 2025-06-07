@@ -217,63 +217,163 @@ MonoBehaviour:
   entities:
   - position: {x: 2, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 5}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 5}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 1}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 0}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 0}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 1}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 1}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 1}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 0}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 0}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 2}
     entityID: 0
-  - position: {x: 9, y: 8}
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 3
+      param4: 10
+    - actionType: Move
+      param1: 1
+      param2: 0
+      param3: 3
+      param4: 10
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 3
+      param4: 10
+    - actionType: Move
+      param1: 1
+      param2: 0
+      param3: 4
+      param4: 10
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 6
+      param4: 10
+    - actionType: Move
+      param1: -1
+      param2: 0
+      param3: 7
+      param4: 10
+  - position: {x: 5, y: 5}
     entityID: 0
-  - position: {x: 5, y: 6}
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 3
+      param4: 7
+    - actionType: Move
+      param1: -1
+      param2: 0
+      param3: 4
+      param4: 7
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 3
+      param4: 7
+    - actionType: Move
+      param1: 1
+      param2: 0
+      param3: 4
+      param4: 7
+  - position: {x: 9, y: 7}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: -1
+      param2: 0
+      param3: 4
+      param4: 8
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 2
+      param4: 8
+    - actionType: Move
+      param1: 1
+      param2: 0
+      param3: 4
+      param4: 8
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 2
+      param4: 8
   gridWidth: 10
   gridHeight: 10

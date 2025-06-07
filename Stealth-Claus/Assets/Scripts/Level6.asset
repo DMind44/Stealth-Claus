@@ -217,113 +217,218 @@ MonoBehaviour:
   entities:
   - position: {x: 2, y: 7}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 1
+      param4: 3
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 1
+      param4: 3
   - position: {x: 0, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 9, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 5, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 3, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 2}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 1, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 7}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 1
+      param4: 3
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 1
+      param4: 3
   - position: {x: 5, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 7}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 1
+      param4: 3
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 1
+      param4: 3
   - position: {x: 7, y: 3}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 1
+      param4: 1
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 1
+      param4: 1
   - position: {x: 4, y: 3}
     entityID: 0
+    actions:
+    - actionType: Move
+      param1: 0
+      param2: 1
+      param3: 1
+      param4: 3
+    - actionType: Move
+      param1: 0
+      param2: -1
+      param3: 1
+      param4: 3
   - position: {x: 4, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 4, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 2, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 6}
     entityID: 1
+    actions: []
   - position: {x: 7, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 6, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 4}
     entityID: 1
+    actions: []
   - position: {x: 8, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 7}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 8}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 3}
     entityID: 1
+    actions: []
   - position: {x: 0, y: 2}
     entityID: 1
+    actions: []
   gridWidth: 10
   gridHeight: 10
