@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,15 +25,22 @@ public class Santa : Tile
     private InputType inputType = InputType.Neutral;
     private Vector2 moveVector;
 
+    private Collider2D collider;
+
     override public bool isSanta()
     {
         return true;
     }
 
+    private void Awake()
+    {
+        collider = GetComponent<Collider2D>();
+    }
+
     void Update()
     {
         initAfterStart();
-        if (!GridManager.instance.isFrozen())
+        if (!GridManager.Instance.isFrozen())
         {
             if (math.abs(moveVector.x) > 0.5)
             {

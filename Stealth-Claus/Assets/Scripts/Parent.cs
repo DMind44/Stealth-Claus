@@ -92,19 +92,19 @@ public class Parent : Tile
         {
             if (checkOcupiedDelta(dirX * i, dirY * i))
             {
-                Tile possibleSanta = GridManager.instance.getTile((int)x + dirX * i, (int)y + dirY * i);
+                Tile possibleSanta = GridManager.Instance.getTile((int)x + dirX * i, (int)y + dirY * i);
                 if (possibleSanta != null && possibleSanta.isSanta())
                 {
-                    Vector3 cords2 = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x - 0.5f + dirX * i, y + 0.5f + dirY * i)));
+                    Vector3 cords2 = camera.WorldToScreenPoint(GridManager.Instance.convertPoint(new Vector2(x - 0.5f + dirX * i, y + 0.5f + dirY * i)));
                     DrawQuad(new Rect(cords2.x + 5, Screen.height - cords2.y + 5, tileWidth - 10, tileWidth - 10));
-                    if (!GridManager.instance.isFrozen())
+                    if (!GridManager.Instance.isFrozen())
                     {
-                        GridManager.instance.startCaught();
+                        GridManager.Instance.startCaught();
                     }
                 }
                 break;
             }
-            Vector3 cords = camera.WorldToScreenPoint(GridManager.instance.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
+            Vector3 cords = camera.WorldToScreenPoint(GridManager.Instance.convertPoint(new Vector2(x-0.5f + dirX*i, y+0.5f+dirY*i)));
             DrawQuad(new Rect(cords.x+5, Screen.height-cords.y+5, tileWidth-10, tileWidth-10));
 
         }
@@ -136,7 +136,7 @@ public class Parent : Tile
     void Update()
     {
         initAfterStart();
-        if (!GridManager.instance.isFrozen())
+        if (!GridManager.Instance.isFrozen())
         {
             parentActions[actionIndex].actionStep(this);
             if (parentActions[actionIndex].actionDone())

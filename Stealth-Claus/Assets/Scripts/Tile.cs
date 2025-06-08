@@ -21,7 +21,7 @@ public class Tile : MonoBehaviour
     {
         if (!initialized)
         {
-            GridManager.instance.setTile(x, y, this);
+            GridManager.Instance.setTile(x, y, this);
             initialized = true;
         }
     }
@@ -29,24 +29,24 @@ public class Tile : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected void Start()
     {
-        GridManager.instance = GameObject.Find("GridManager").GetComponent<GridManager>();
+        GridManager.Instance = GameObject.Find("GridManager").GetComponent<GridManager>();
         startx = x;
         starty = y;
     }
 
     public void moveTo(int newX, int newY)
     {
-        if (GridManager.instance != null && newX < GridManager.instance.width && newY < GridManager.instance.height) {
+        if (GridManager.Instance != null && newX < GridManager.Instance.width && newY < GridManager.Instance.height) {
 
-            Tile tile = GridManager.instance.getTile(newX, newY);
+            Tile tile = GridManager.Instance.getTile(newX, newY);
             if (tile != null)
             {
                 tile.x = x;
                 tile.y = y;
             }
-            GridManager.instance.setTile(x, y, GridManager.instance.getTile(newX, newY));
+            GridManager.Instance.setTile(x, y, GridManager.Instance.getTile(newX, newY));
             x = newX; y = newY;
-            GridManager.instance.setTile(x, y, this);
+            GridManager.Instance.setTile(x, y, this);
         }
     }
 
@@ -85,18 +85,18 @@ public class Tile : MonoBehaviour
     }
     public bool checkOcupied(int x, int y)
     {
-        if (x < GridManager.instance.width && y < GridManager.instance.height && x >= 0 && y >= 0)
+        if (x < GridManager.Instance.width && y < GridManager.Instance.height && x >= 0 && y >= 0)
         {
-            return GridManager.instance.getTile((int)x, (int)y) != null;
+            return GridManager.Instance.getTile((int)x, (int)y) != null;
         }
         return true;
     }
 
     public Tile getTile(int x, int y)
     {
-        if (x < GridManager.instance.width && y < GridManager.instance.height && x >= 0 && y >= 0)
+        if (x < GridManager.Instance.width && y < GridManager.Instance.height && x >= 0 && y >= 0)
         {
-            return GridManager.instance.getTile((int)x, (int)y);
+            return GridManager.Instance.getTile((int)x, (int)y);
         }
         return null;
     }

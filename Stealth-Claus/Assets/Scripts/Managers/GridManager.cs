@@ -13,25 +13,25 @@ public class GridManager : MonoBehaviour
     
     private Tile[,] tiles;
 
-    public static GridManager instance;
+    public static GridManager Instance;
     
     public GameObject[] entityPrefabs;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        width = MapManager.instance.width;
-        height = MapManager.instance.height;
+        width = MapManager.Instance.width;
+        height = MapManager.Instance.height;
         tiles = new Tile[width, height];
-        if (MapManager.instance.levelData != null) BuildLevelFromData();
+        if (MapManager.Instance.levelData != null) BuildLevelFromData();
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class GridManager : MonoBehaviour
 
     public void nextLevel()
     {
-        
+        GameManager.Instance.NextLevel();
     }
 
     public void startWon()
@@ -122,8 +122,8 @@ public class GridManager : MonoBehaviour
 
     public void BuildLevelFromData()
     {
-        entityPrefabs = MapManager.instance.levelData.palette.entityPrefabs;
-        foreach (var tile in MapManager.instance.levelData.entities)
+        entityPrefabs = MapManager.Instance.levelData.palette.entityPrefabs;
+        foreach (var tile in MapManager.Instance.levelData.entities)
         {
             if (tile == null) continue;
             var prefab = entityPrefabs[tile.entityID];

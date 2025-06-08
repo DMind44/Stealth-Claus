@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour
 
     public Transform camera;
 
-    public static MapManager instance;
+    public static MapManager Instance;
     
     public LevelData levelData;
 
@@ -35,13 +35,13 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void GenerateGridFromData(LevelData data)
+    public void GenerateGridFromData()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                var tileData = data.GetTileAtPosition(x, y);
+                var tileData = levelData.GetTileAtPosition(x, y);
                 if (tileData == null) continue;
                 var currentTile = tilePrefabs[tileData.tileID];
                 var spawnedTile = Instantiate(currentTile, new Vector3(x, y, 1), Quaternion.identity);
@@ -55,15 +55,15 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         if (levelData == null) GenerateGrid();
-        else GenerateGridFromData(levelData);
+        else GenerateGridFromData();
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         
         if (levelData != null)
