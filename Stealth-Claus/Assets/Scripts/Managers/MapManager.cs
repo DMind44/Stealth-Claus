@@ -55,7 +55,11 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         if (levelData == null) GenerateGrid();
-        else GenerateGridFromData();
+        else
+        {
+            
+            GenerateGridFromData();
+        }
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 

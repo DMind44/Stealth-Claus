@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        
+        if (MenuManager.instance != null)
+        {
+            SetLevel(MenuManager.instance.level);
+        }
     }
     
     void Update()
