@@ -17,6 +17,13 @@ public class MapManager : MonoBehaviour
     void LoadTilePrefabs()
     {
         tilePrefabs = levelData.palette.tilePrefabs;
+        if (GridManager.Instance != null)
+        {
+            GridManager.Instance.entityPrefabs = levelData.palette.entityPrefabs;
+            GridManager.Instance.width = width;
+            GridManager.Instance.height = height;
+            GridManager.Instance.tiles = new Tile[width, height];
+        }
     }
 
     void GenerateGrid()
@@ -54,12 +61,12 @@ public class MapManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (levelData == null) GenerateGrid();
+        /*if (levelData == null) GenerateGrid();
         else
         {
             
             GenerateGridFromData();
-        }
+        }*/
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 

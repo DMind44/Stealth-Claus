@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 763765823}
   m_Layer: 0
   m_Name: MenuManager
-  m_TagString: Untagged
+  m_TagString: DoNotDestroy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e533a3ef8247f44b92769b8729bff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 1
   numLevels: 6
   levelButtonPrefab: {fileID: 7523183237314338872, guid: 7278efdb068e6d04e9500cb0b32048f7, type: 3}
   LevelSelectButtons: {fileID: 2069838876}

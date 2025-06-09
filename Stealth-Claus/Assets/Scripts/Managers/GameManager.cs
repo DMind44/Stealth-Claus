@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
         {
             SetLevel(MenuManager.instance.level);
         }
+        else
+        {
+            SetLevel(0);
+        }
     }
     
     void Update()
@@ -49,6 +53,10 @@ public class GameManager : MonoBehaviour
 
     private void ReloadLevel()
     {
+        while (GridManager.Instance == null || MapManager.Instance == null)
+        {
+            Debug.Log("waiting for managers to load");
+        }
         ClearScene();
         MapManager.Instance.levelData = levels[currentLevel];
         MapManager.Instance.GenerateGridFromData();

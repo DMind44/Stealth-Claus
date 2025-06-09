@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
 
     private double timer = 0;
     
-    private Tile[,] tiles;
+    public Tile[,] tiles;
 
     public static GridManager Instance;
     
@@ -23,15 +23,22 @@ public class GridManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        if (MapManager.Instance != null)
+        {
+            entityPrefabs = MapManager.Instance.levelData.palette.entityPrefabs;
+            width = MapManager.Instance.width;
+            height = MapManager.Instance.height;
+            tiles = new Tile[width, height];
+        }
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        width = MapManager.Instance.width;
-        height = MapManager.Instance.height;
-        tiles = new Tile[width, height];
-        if (MapManager.Instance.levelData != null) BuildLevelFromData();
+
+        //if (MapManager.Instance.levelData != null) BuildLevelFromData();
     }
 
     // Update is called once per frame
@@ -122,7 +129,6 @@ public class GridManager : MonoBehaviour
 
     public void BuildLevelFromData()
     {
-        entityPrefabs = MapManager.Instance.levelData.palette.entityPrefabs;
         foreach (var tile in MapManager.Instance.levelData.entities)
         {
             if (tile == null) continue;
